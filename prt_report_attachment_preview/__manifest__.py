@@ -7,6 +7,7 @@
     'category': 'Productivity',
     'license': 'GPL-3',
     'website': 'https://demo.promintek.com',
+    'live_test_url': 'https://demo.promintek.com',
     'description': """
     Preview reports and pdf attachments in browser instead of downloading them.
     Open Report or PDF Attachment in new tab instead of downloading.              
