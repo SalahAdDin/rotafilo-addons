@@ -1,12 +1,7 @@
 # (c) 2014 Daniel Campos <danielcampos@avanzosc.es>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import (
-    api,
-    fields,
-    models,
-    _
-)
+from odoo import api, fields, models, _
 
 
 class Task(models.Model):
@@ -18,10 +13,10 @@ class Task(models.Model):
     )
     mrp_production_id = fields.Many2one('mrp.production', string='Manufacturing Order')
     # production_scheduled_products = fields.One2many(
-        #   comodel_name="mrp.production.produce.line",
-        #   inverse_name='task_id',
-        #   related='mrp_production_id.product_lines',
-        #   string='Scheduled Products'
+    #   comodel_name="mrp.production.produce.line",
+    #   inverse_name='task_id',
+    #   related='mrp_production_id.product_lines',
+    #   string='Scheduled Products'
     #   )
     final_product = fields.Many2one(
         comodel_name='product.product',

@@ -3,12 +3,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 from datetime import date
 
-from odoo import (
-    api,
-    fields,
-    models,
-    _
-)
+from odoo import api, fields, models, _
 
 
 class MrpProduction(models.Model):
@@ -17,11 +12,10 @@ class MrpProduction(models.Model):
     @api.multi
     @api.depends('analytic_account_id')
     def _compute_project_id(self):
+        project = self.env['project.project']
         for record in self:
             project_domain = [('analytic_account_id', '=', record.analytic_account_id.id)]
-            record.project_id = (
-                self.env['project.project'].search(project_domain, limit=1)[:1]
-            )
+            record.project_id = project.search(project_domain, limit=1)[:1]
 
     project_id = fields.Many2one(
         comodel_name="project.project",

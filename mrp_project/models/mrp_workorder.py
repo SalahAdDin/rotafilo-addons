@@ -1,12 +1,7 @@
 # (c) 2018 Jose Luis Sandoval Alaguna <jose.alaguna@rotafilo.com.tr>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import (
-    api,
-    fields,
-    models,
-    _
-)
+from odoo import api, fields, models, _
 
 
 class MrpWorkorder(models.Model):

@@ -1,22 +1,17 @@
 # (c) 2014 Daniel Campos <danielcampos@avanzosc.es>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import (
-    api,
-    fields,
-    models,
-    _
-)
+from odoo import api, fields, models, _
 
 
 class ProjectProject(models.Model):
     _inherit = 'project.project'
 
     def _compute_mrp_production_count(self):
+        production = self.env['mrp.production']
         for project in self:
-            project.production_count = self.env['mrp.production'].search_count([
-                ('project_id', '=', self.id)
-            ])
+            domain = [('project_id', '=', self.id)]
+            project.production_count = production.search_count(domain)
 
     @api.multi
     def mrp_production_tree_view(self):

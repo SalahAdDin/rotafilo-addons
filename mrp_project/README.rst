@@ -63,7 +63,7 @@ TO DO:
 ======
 - [X] Task must be linked with work orders automatically, instead to do it manually
 - [X] If there is a Sale Order source and its has a relate project, this project will be linked to the Manufacturing Order by default.
-- [ ] Conflict with `mrp_analytic`: button does not show the correct productions' number
+- [X] Conflict with `mrp_analytic`: button does not show the correct productions' number
 
 Credits
 =======
