@@ -10,8 +10,8 @@
                 <button class="oe_stat_button"
                         type="object"
                         name="sale_order_tree_view"
-                        icon="fa-shopping-cart"
                         help="View project's sale orders">
+                    <i class="fa-shopping-cart"/>
                     <field string="Sale Orders" name="sale_order_count" widget="statinfo"/>
                 </button>
             </xpath>

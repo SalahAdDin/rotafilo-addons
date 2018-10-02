@@ -4,7 +4,7 @@
 from datetime import date
 
 from odoo import api, fields, models, _
-from odoo.exceptions import Warning
+from odoo.exceptions import UserError
 
 
 class SaleOrder(models.Model):
@@ -45,7 +45,7 @@ class SaleOrder(models.Model):
         project_obj = self.env['project.project']
         for order in self:
             if order.related_project_id:
-                raise Warning(_(
+                raise UserError(_(
                     'There is a project already related with this sale order. Order: {0}, Project: {1}'.format(
                         order,
                         order.related_project_id

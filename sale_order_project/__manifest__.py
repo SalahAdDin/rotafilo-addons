@@ -13,7 +13,7 @@ Sale Order Project
 ==================
 Link module to map sale orders to project
         """,
-    'website': 'http://www.akretion.com/',
+    'website': 'https://github.com/OCA/project',
     'depends': [
         'project',
         'sale',

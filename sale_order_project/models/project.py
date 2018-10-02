@@ -1,25 +1,19 @@
-from odoo import (
-    api,
-    fields,
-    models,
-    _
-)
+from odoo import api, fields, models, _
+
 
 class Project(models.Model):
     _inherit = 'project.project'
 
     def _compute_sale_orders_count(self):
+        order = self.env['sale.order']
         for project in self:
-            project.sale_order_count = self.env['sale.order'].search_count([
-                ('related_project_id', '=', project.id)
-            ])
+            domain = [('related_project_id', '=', project.id)]
+            project.sale_order_count = order.search_count(domain)
 
     @api.multi
     def sale_order_tree_view(self):
         self.ensure_one()
-        domain = [
-            ('related_project_id', '=', self.ids)
-        ]
+        domain = [('related_project_id', '=', self.ids)]
         return {
             'name': _('Sale Orders'),
             'domain': domain,
@@ -34,7 +28,7 @@ class Project(models.Model):
                             to relate Sale Orders with your Project.
                         </p>'''),
             'limit': 80,
-            'context': "{'default_related_project_id': '%s'}" % (self.id)
+            'context': "{{'default_related_project_id': '{}'}}".format(self.id)
         }
 
     sale_order_count = fields.Integer(compute='_compute_sale_orders_count', string="Number of sale orders")
