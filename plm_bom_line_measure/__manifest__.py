@@ -14,6 +14,7 @@ Manage volume measures for items in Product's BoM.
     """,
     'data': [
         'views/mrp_bom_lines.xml',
+        'views/purchase_views.xml',
     ],
     'demo': [],
     'test': [],
