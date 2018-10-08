@@ -7,7 +7,12 @@
     'sequence': 15,
     'summary': '',
     'images': [],
-    'depends': [],
+    'depends': [
+        'base',
+        'purchase',
+        'product',
+        'mrp'
+    ],
     'description': """
 Manage volume measures for items in Product's BoM.
 ==============================================
