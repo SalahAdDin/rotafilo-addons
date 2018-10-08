@@ -10,8 +10,10 @@ from odoo import _
 
 class MrpBomLine(models.Model):
     _inherit = 'mrp.bom.line'
+
     measure = fields.Char(_('Measure'))
     measure_uom_id = fields.Many2one(
-        'product.uom', 'Product Unit of Measure',
+        'product.uom',
+        'Unit of Measure',
         required=True,
         help="Unit of Measure (Unit of Measure) is the unit of measurement for the products measure")
