@@ -1,12 +1,13 @@
 # © 2018 José Luis Sandoval Alaguna - Rotafilo
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class AnalyticAccount(models.Model):
     _inherit = "account.analytic.account"
 
+    @api.multi
     def _compute_num_sale_orders(self):
         order = self.env['sale.order']
         for analytic_account in self:

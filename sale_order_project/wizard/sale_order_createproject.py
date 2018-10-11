@@ -16,21 +16,15 @@ class SaleOrderCreateProject(models.TransientModel):
     @api.multi
     def action_create_project_task(self):
         self.ensure_one()
-        # get the order to update
         order = self.sale_order_id
         project = self.related_project_id
 
-        # if related_project_id is empty
         if not project.id and not order.related_project_id:
-            # create new project.project
             order.action_create_project()
-        # if project but order is not related to that project
         elif project.id and not order.related_project_id:
-            # update sale.order.related_project_id with the selected project.project.id
             order.write({
                 'analytic_account_id': project.analytic_account_id.id
             })
-        # else
         else:
             raise UserError(_(
                 'This sale order already has a related project. Order: {0}, Project: {1}'.format(

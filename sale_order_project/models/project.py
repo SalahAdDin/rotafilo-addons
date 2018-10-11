@@ -4,6 +4,7 @@ from odoo import api, fields, models, _
 class Project(models.Model):
     _inherit = 'project.project'
 
+    @api.multi
     def _compute_sale_orders_count(self):
         order = self.env['sale.order']
         for project in self:
