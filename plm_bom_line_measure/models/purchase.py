@@ -15,6 +15,5 @@ class PurchaseOrderLine(models.Model):
     measure_uom_id = fields.Many2one(
         'product.uom',
         'Unit of Measure',
-        required=True,
         help="Unit of Measure (Unit of Measure) is the unit of measurement for the products measure"
     )
