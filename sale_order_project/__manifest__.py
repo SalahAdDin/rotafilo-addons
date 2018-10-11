@@ -23,10 +23,10 @@ Link module to map sale orders to project
         'sale_management',
     ],
     'data': [
-        'views/analytic_account_view.xml',
-        'views/sale_view.xml',
-        'views/project_view.xml',
         'wizard/sale_order_createproject_views.xml',
+        'views/analytic_account_view.xml',
+        'views/project_view.xml',
+        'views/sale_view.xml',
     ],
     'installable': True,
 }
