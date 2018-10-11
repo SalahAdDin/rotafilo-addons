@@ -6,6 +6,14 @@ class MrpProductionCreateProject(models.TransientModel):
     """ wizard to create a Project from a Manufacturing Order """
     _name = "mrp.production.createproject"
 
+    @api.model
+    def default_get(self, fields):
+        result = super(MrpProductionCreateProject, self).default_get(fields)
+        mrp_production_id = self.env.context.get('active_id')
+        if mrp_production_id:
+            result['mrp_production_id'] = mrp_production_id
+        return result
+
     mrp_production_id = fields.Many2one('mrp.production', string='Production', domain=[('type', '=', 'production')])
     project_id = fields.Many2one(
         'project.project',
@@ -33,7 +41,7 @@ class MrpProductionCreateProject(models.TransientModel):
             if 'sale_id' in obj_production._fields and 'related_project_id' in obj_order._fields:
                 # getting the sale order source
                 sale_order = production.sale_id
-                if sale_order :
+                if sale_order:
                     # getting the sale order's related project
                     project = sale_order.related_project_id
                     if project.id:
