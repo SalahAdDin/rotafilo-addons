@@ -10,8 +10,8 @@
                 <button name="%(sale.action_orders)d"
                         class="oe_inline oe_stat_button"
                         type="action" groups="sale.group_analytic_accounting"
+                        icon="fa-shopping-cart"
                         context="{'default_analytic_account_id': active_id,'search_default_analytic_account_id': [active_id]}">
-                    <i class="fa-shopping-cart"/>
                     <field name="num_sale_orders"
                            widget="statinfo"
                            string="Sale Order(s)"

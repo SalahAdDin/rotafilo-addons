@@ -14,4 +14,7 @@ class AnalyticAccount(models.Model):
             domain = ('analytic_account_id', '=', analytic_account.id)
             analytic_account.num_sale_orders = order.search_count([domain])
 
-    num_sale_orders = fields.Integer(compute="_compute_num_sale_orders", string="Number of sale orders")
+    num_sale_orders = fields.Integer(
+        compute="_compute_num_sale_orders",
+        string="Number of sale orders"
+    )

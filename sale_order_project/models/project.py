@@ -24,12 +24,15 @@ class Project(models.Model):
             'view_mode': 'kanban,tree,form',
             'view_type': 'form',
             'help': _('''<p class="oe_view_nocontent_create">
-                            Sale Orders can be related to your project.</p><p>
-                            Go to your Sale Order and to click in the respective button 
-                            to relate Sale Orders with your Project.
-                        </p>'''),
+                Sale Orders can be related to your project.</p><p>
+                Go to your Sale Order and to click in the respective button
+                to relate Sale Orders with your Project.
+            </p>'''),
             'limit': 80,
             'context': "{{'default_related_project_id': '{}'}}".format(self.id)
         }
 
-    sale_order_count = fields.Integer(compute='_compute_sale_orders_count', string="Number of sale orders")
+    sale_order_count = fields.Integer(
+        compute='_compute_sale_orders_count',
+        string="Number of sale orders"
+    )

@@ -14,11 +14,16 @@ class SaleOrderCreateProject(models.TransientModel):
             result['sale_order_id'] = sale_order_id
         return result
 
-    sale_order_id = fields.Many2one('sale.order', string='Order', domain=[('type', '=', 'order')])
+    sale_order_id = fields.Many2one(
+        'sale.order',
+        string='Order',
+        domain=[('type', '=', 'order')]
+    )
     related_project_id = fields.Many2one(
         'project.project',
         string='Project',
-        help=_("Leave it blank if you want create a new project with the sale order's name as default name.")
+        help=_("Leave it blank if you want create a new project "
+               "with the sale order's name as default name.")
     )
 
     @api.multi
@@ -35,7 +40,8 @@ class SaleOrderCreateProject(models.TransientModel):
             })
         else:
             raise UserError(_(
-                'This sale order already has a related project. Order: {0}, Project: {1}'.format(
+                '''This sale order already has a related project.
+                Order: {0}, Project: {1}'''.format(
                     order,
                     order.related_project_id
                 )

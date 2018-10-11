@@ -14,7 +14,9 @@ class SaleOrder(models.Model):
     @api.depends('analytic_account_id')
     def _compute_related_project_id(self):
         for record in self:
-            project_domain = [('analytic_account_id', '=', record.analytic_account_id.id)]
+            project_domain = [(
+                'analytic_account_id', '=', record.analytic_account_id.id
+            )]
             record.related_project_id = (
                 self.env['project.project'].search(project_domain, limit=1)[:1]
             )
@@ -46,7 +48,8 @@ class SaleOrder(models.Model):
         for order in self:
             if order.related_project_id:
                 raise UserError(_(
-                    'There is a project already related with this sale order. Order: {0}, Project: {1}'.format(
+                    '''There is a project already related with this sale order.
+                        Order: {0}, Project: {1}'''.format(
                         order,
                         order.related_project_id
                     )
