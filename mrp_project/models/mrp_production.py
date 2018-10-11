@@ -14,7 +14,9 @@ class MrpProduction(models.Model):
     def _compute_project_id(self):
         project = self.env['project.project']
         for record in self:
-            project_domain = [('analytic_account_id', '=', record.analytic_account_id.id)]
+            project_domain = [(
+                'analytic_account_id', '=', record.analytic_account_id.id
+            )]
             record.project_id = project.search(project_domain, limit=1)[:1]
 
     project_id = fields.Many2one(
@@ -54,7 +56,9 @@ class MrpProduction(models.Model):
         product = workorder.production_id.product_id
         task_name = "{0}::{1}- {2}".format(
             workorder.production_id.name,
-            "[{0}] ".format(product.default_code if product.default_code else ""),
+            "[{0}] ".format(
+                product.default_code if product.default_code else ""
+            ),
             product.name
         )
         task_descr = _("""
@@ -86,7 +90,9 @@ class MrpProduction(models.Model):
 
     @api.multi
     def _generate_workorders(self, exploded_boms):
-        workorders = super(MrpProduction, self)._generate_workorders(exploded_boms)
+        workorders = super(MrpProduction, self)._generate_workorders(
+            exploded_boms
+        )
         task_obj = self.env['project.task']
         for workorder in workorders:
             task_domain = [

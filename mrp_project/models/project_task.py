@@ -1,7 +1,7 @@
 # (c) 2014 Daniel Campos <danielcampos@avanzosc.es>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 
 
 class Task(models.Model):
@@ -11,7 +11,10 @@ class Task(models.Model):
         comodel_name='mrp.workorder',
         string='Work Order',
     )
-    mrp_production_id = fields.Many2one('mrp.production', string='Manufacturing Order')
+    mrp_production_id = fields.Many2one(
+        'mrp.production',
+        string='Manufacturing Order'
+    )
     # production_scheduled_products = fields.One2many(
     #   comodel_name="mrp.production.produce.line",
     #   inverse_name='task_id',
@@ -29,12 +32,16 @@ class Task(models.Model):
         if self.env.context.get('name_show_user'):
             res = []
             for task in self:
-                res.append((task.id, "[{0}] {1}".format(task.user_id.name, task.name)))
+                res.append((
+                    task.id, "[{0}] {1}".format(task.user_id.name, task.name)
+                ))
             return res
         return super(Task, self).name_get()
 
     @api.multi
     def write(self, vals):
         for rec in self:
-            super(Task, rec.with_context(production=rec.mrp_production_id)).write(vals)
+            super(Task, rec.with_context(
+                production=rec.mrp_production_id
+            )).write(vals)
         return True

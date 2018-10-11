@@ -26,12 +26,15 @@ class ProjectProject(models.Model):
             'view_mode': 'kanban,tree,form',
             'view_type': 'form',
             'help': _('''<p class="oe_view_nocontent_create">
-                                    Manufacturing Orders can be related to your project.</p><p>
-                                    Go to your Manufacturing Order and to click in the respective button 
-                                    to relate Manufacturing Orders with your Project.
-                                </p>'''),
+                Manufacturing Orders can be related to your project.</p><p>
+                Go to your Manufacturing Order and to click in the respective button
+                to relate Manufacturing Orders with your Project.
+                </p>'''),
             'limit': 80,
-            'context': "{{'search_default_project_id': [{0}],'default_project_id': {0}}}".format(self.id)
+            'context': '''
+                {{'search_default_project_id': [{0}],
+                'default_project_id': {0}}}
+                '''.format(self.id)
         }
 
     production_count = fields.Integer(
