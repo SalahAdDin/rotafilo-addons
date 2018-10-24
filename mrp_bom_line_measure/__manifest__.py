@@ -1,9 +1,9 @@
 {
-    'name': 'PLM Measure',
+    'name': 'MRP Measure',
     'version': '11.0',
     'author': 'José Luis Sandoval Alaguna',
     'website': '',
-    'category': 'Product Lifecycle Management',
+    'category': 'Manufacture',
     'sequence': 15,
     'summary': '',
     'images': [],
@@ -11,10 +11,11 @@
         'base',
         'purchase',
         'product',
-        'mrp'
+        'mrp',
+        'sale_stock'
     ],
     'description': """
-Manage volume measures for items in Product's BoM.
+Manage measures for items in Product's BoM.
 ==============================================
     """,
     'data': [
