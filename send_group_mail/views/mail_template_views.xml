@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- model.name inherit form view -->
+    <record model="ir.ui.view" id="email_template_form">
+        <field name="name">email.template.form</field>
+        <field name="model">mail.template</field>
+        <field name="inherit_id" ref="mail.email_template_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_to']" position="after">
+                <field name="group_to" attrs="{'invisible': [('use_default_to', '=', True)]}"/>
+            </xpath>
+        </field>
+    </record>
+    <!-- model.name inherit tree view -->
+    <record model="ir.ui.view" id="email_template_tree">
+        <field name="name">email.template.tree</field>
+        <field name="model">mail.template</field>
+        <field name="inherit_id" ref="mail.email_template_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_to']" position="after">
+                <field name="group_to" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
