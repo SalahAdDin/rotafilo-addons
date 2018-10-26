@@ -29,7 +29,7 @@ class MrpProduction(models.Model):
             'bom_line_id': bom_line.id,
             'product_id': bom_line.product_id.id,
             'measure': bom_line.measure,
-            'measure_uom_id': bom_line.measure_uom_id,
+            'measure_uom_id': bom_line.measure_uom_id.id,
             'product_uom_qty': quantity,
             'product_uom': bom_line.product_uom_id.id,
             'location_id': source_location.id,
