@@ -8,10 +8,10 @@
     'summary': '',
     'images': [],
     'depends': [
-        'purchase',
         'mrp',
+        'stock',
+        'purchase',
         'sale_stock',
-        'stock'
     ],
     'description': """
 Manage measures for items in Product's BoM.
