@@ -1,12 +1,7 @@
 # (c) 2014 Daniel Campos <danielcampos@avanzosc.es>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo import (
-    api,
-    fields,
-    models,
-    _
-)
+from odoo import api, fields, models
 
 
 class AccountAnalyticLine(models.Model):
@@ -20,7 +15,6 @@ class AccountAnalyticLine(models.Model):
         comodel_name='mrp.workorder',
         string='Work Order'
     )
-
 
     @api.model
     def create(self, vals):

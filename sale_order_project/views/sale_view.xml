@@ -10,7 +10,7 @@
                     <field name="related_project_id"/>
                 </group>
             </group>
-            <xpath expr="//button[@name='action_view_invoice']" position="before">
+            <button name="action_view_invoice" position="after">
                 <!-- icon="fa-project-diagram"
                     This must to be the proper icon, but, until Odoos 12 version the current Font-Awesome version is 4.7, such has not this icon; instead we will use the current icon.
                     https://github.com/odoo/odoo/issues/21648#issuecomment-353099417
@@ -27,7 +27,7 @@
                         <span class="o_stat_text">Project</span>
                     </div>
                 </button>
-            </xpath>
+            </button>
         </field>
     </record>
 </odoo>
