@@ -1,5 +1,5 @@
 {
-    'name': 'MRP Measure',
+    'name': 'MRP Bom Line Measures',
     'version': '11.0',
     'author': 'José Luis Sandoval Alaguna',
     'website': '',
@@ -8,11 +8,10 @@
     'summary': '',
     'images': [],
     'depends': [
-        'base',
-        'purchase',
-        'product',
         'mrp',
-        'sale_stock'
+        'stock',
+        'purchase',
+        'sale_stock',
     ],
     'description': """
 Manage measures for items in Product's BoM.
@@ -21,6 +20,7 @@ Manage measures for items in Product's BoM.
     'data': [
         'views/mrp_bom_lines.xml',
         'views/purchase_views.xml',
+        'report/mrp_bom_structure_report_templates.xml'
     ],
     'demo': [],
     'test': [],

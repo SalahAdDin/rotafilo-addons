@@ -13,8 +13,13 @@ class MrpBomLine(models.Model):
 
     item_num = fields.Integer(_('CAD Item Position'), help=_(
         "This is the item reference position into the CAD document that declares this BoM."))
-    measure = fields.Char(_('Measure'))
+    measure = fields.Char(
+        _('Measure'),
+        help=_("Type the measure without blank spaces and un lowercase: ##x##")
+    )
     measure_uom_id = fields.Many2one(
         'product.uom',
         'Unit of Measure',
-        help="Unit of Measure (Unit of Measure) is the unit of measurement for the products measure")
+        help=_("Unit of Measure (Unit of Measure) is the unit of measurement"
+               "for the products measure")
+    )
