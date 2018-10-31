@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_inherit_purchasequotation_document" inherit_id="purchase.report_purchasequotation_document">
+            <xpath expr="//table[@class='table table-condensed']//thead//tr" position="replace">
+                <tr>
+                    <th>
+                        <strong>Description</strong>
+                    </th>
+                    <th class="text-right">
+                        <strong>Measure</strong>
+                    </th>
+                    <th class="text-right">
+                        <strong>Qty</strong>
+                    </th>
+                    <th class="text-center">
+                        <strong>Expected Date</strong>
+                    </th>
+                </tr>
+            </xpath>
+            <xpath expr="//table/tbody" position="replace">
+                <tr t-foreach="o.order_line" t-as="order_line">
+                    <td>
+                        <span t-field="order_line.name"/>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="order_line.measure"/>
+                        <span t-field="order_line.measure_uom_id" groups="product.group_uom"/>
+                    </td>
+                    <td class="text-right">
+                        <span t-field="order_line.product_qty"/>
+                        <span t-field="order_line.product_uom" groups="product.group_uom"/>
+                    </td>
+                    <td class="text-center">
+                        <span t-field="order_line.date_planned"/>
+                    </td>
+                </tr>
+            </xpath>
+        </template>
+    </data>
+</odoo>
