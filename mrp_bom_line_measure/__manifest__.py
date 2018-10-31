@@ -20,6 +20,7 @@ Manage measures for items in Product's BoM.
     'data': [
         'views/mrp_bom_lines.xml',
         'views/purchase_views.xml',
+        'report/mrp_bom_structure_report_templates.xml'
     ],
     'demo': [],
     'test': [],
