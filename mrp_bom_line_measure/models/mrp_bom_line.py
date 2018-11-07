@@ -11,11 +11,19 @@ from odoo import _
 class MrpBomLine(models.Model):
     _inherit = 'mrp.bom.line'
 
-    item_num = fields.Integer(_('CAD Item Position'), help=_(
-        "This is the item reference position into the CAD document that declares this BoM."))
+    item_num = fields.Char(
+        _('CAD Item Position'),
+        help=_(
+            "This is the item reference position into the CAD "
+            "document that declares this BoM."
+        ),
+        size=3
+    )
     measure = fields.Char(
         _('Measure'),
-        help=_("Type the measure without blank spaces and un lowercase: ##x##")
+        help=_(
+            "Type the measure without blank spaces and un lowercase: ##x##"
+        )
     )
     measure_uom_id = fields.Many2one(
         'product.uom',
