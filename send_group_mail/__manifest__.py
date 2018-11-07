@@ -2,7 +2,7 @@
     'name': 'Send Group Mail',
     'version': '11.0.1.0.0',
     'summary': 'Enable sending mail to partner groups.',
-    'category': 'Extra Tools',
+    'category': 'Tools',
     'author': 'Rotafilo',
     'maintainer': 'Rotafilo',
     'website': '',
