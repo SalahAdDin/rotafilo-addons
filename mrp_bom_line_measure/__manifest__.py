@@ -5,7 +5,7 @@
     'website': '',
     'category': 'Manufacture',
     'sequence': 15,
-    'summary': '',
+    'summary': 'Add engineering fields to BoM and Manufacturing issues.',
     'images': [],
     'depends': [
         'mrp',
@@ -14,8 +14,9 @@
         'sale_stock',
     ],
     'description': """
+MRP Bom Line Measures
+=====================
 Manage measures for items in Product's BoM.
-==============================================
     """,
     'data': [
         'views/mrp_bom_lines.xml',
