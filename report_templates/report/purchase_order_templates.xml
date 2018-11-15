@@ -10,11 +10,19 @@
                 <div class="row">
                     <div class="col-xs-6">
                         <strong class="col-xs-4">Supplier</strong>
-                        <div class="col-xs-7 col-xs-offset-1" t-field="o.partner_id"
+                        <div class="col-xs-8" t-field="o.partner_id"
                              t-options='{"widget": "contact", "fields": ["address", "name", "phone", "email"], "no_marker": True, "phone_icons": True}'/>
                         <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'TIN'"/>:
                             <span t-field="o.partner_id.vat"/>
                         </p>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <h2 t-if="o.state != 'draft'">Purchase Order Confirmation
+                            <span t-field="o.name"/>
+                        </h2>
+                        <h2 t-if="o.state == 'draft'">Request for Quotation
+                            <span t-field="o.name"/>
+                        </h2>
                     </div>
                 </div>
                 <div class="row mt32 mb32">
@@ -28,7 +36,7 @@
                     </div>
                     <div t-if="o.name" class="col-xs-4">
                         <strong class="col-xs-6">RFPO No.:</strong>
-                        <p t-esc="o.origin[-5:] if o.origin else ''"/>
+                        <p t-esc="o.origin[7:] if o.origin else ''"/>
                     </div>
                 </div>
 
