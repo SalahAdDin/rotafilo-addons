@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="external_layout_custom">
+        <div class="header" style="font-size: 10px;">
+            <div class="row">
+                <div class="col-xs-6 mb4 center-block text-center" name="company_address">
+                    <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"
+                         style="max-height: 45px;"/>
+                    <span t-field="company.partner_id"
+                          t-field-options='{"widget": "contact", "fields": ["address", "name", "phone", "email"], "no_marker": True, "phone_icons": True}'/>
+                </div>
+                <div class="col-xs-6 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+            </div>
+            <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                <div class="col-xs-12">
+                    <div style="border-bottom: 1px solid black;"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="article o_report_layout_standard">
+            <t t-raw="0"/>
+        </div>
+
+        <div class="footer" style="font-size: 10px;">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <li t-if="company.phone">Phone:
+                        <span t-field="company.phone"/>
+                    </li>
+                    <li t-if="company.email">Email:
+                        <span t-field="company.email"/>
+                    </li>
+                    <li t-if="company.website">Web:
+                        <span t-field="company.website"/>
+                    </li>
+                    <li t-if="company.vat"><t t-esc="company.country_id.vat_label or 'TIN'"/>:
+                        <span t-field="company.vat"/>
+                    </li>
+                </ul>
+
+                <div name="financial_infos">
+                    <span t-field="company.report_footer"/>
+                </div>
+
+                <div class="text-muted">
+                    Page:
+                    <span class="page"/>
+                    /
+                    <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="external_inherit_layout" inherit_id="web.external_layout">
+        <xpath expr="(//t)[position()=last()]" position="before">
+            <t t-if="company.external_report_layout == 'custom'">
+                <t t-call="report_templates.external_layout_custom">
+                    <t t-raw="0"/>
+                </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>
