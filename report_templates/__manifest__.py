@@ -15,7 +15,8 @@ Easier way to install the custom report templates in the system.
         'purchase',
     ],
     'data': [
-        'report/purchase_order_templates.xml'
+        'report/ir_qweb.xml',
+        'report/purchase_order_templates.xml',
     ],
     'demo': [''],
     'installable': True,
