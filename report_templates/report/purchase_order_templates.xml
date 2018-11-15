@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_inherit_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//div[@class='page']" position="replace">
+            <div class="page">
+                <style>
+                    div.row{ margin: 10px auto; }
+                </style>
+                <div class="oe_structure"/>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <strong class="col-xs-4">Supplier</strong>
+                        <div class="col-xs-8" t-field="o.partner_id"
+                             t-options='{"widget": "contact", "fields": ["address", "name", "phone", "email"], "no_marker": True, "phone_icons": True}'/>
+                        <p t-if="o.partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'TIN'"/>:
+                            <span t-field="o.partner_id.vat"/>
+                        </p>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <h2 t-if="o.state != 'draft'">Purchase Order Confirmation
+                            <span t-field="o.name"/>
+                        </h2>
+                        <h2 t-if="o.state == 'draft'">Request for Quotation
+                            <span t-field="o.name"/>
+                        </h2>
+                    </div>
+                </div>
+                <div class="row mt32 mb32">
+                    <div t-if="o.date_order" class="col-xs-4">
+                        <strong class="col-xs-4">Date:</strong>
+                        <p t-field="o.date_order" t-field-options='{"format": "d m Y, EEEE"}'/>
+                    </div>
+                    <div t-if="o.partner_ref" class="col-xs-4">
+                        <strong class="col-xs-4">RF No.:</strong>
+                        <p t-field="o.partner_ref"/>
+                    </div>
+                    <div t-if="o.name" class="col-xs-4">
+                        <strong class="col-xs-6">RFPO No.:</strong>
+                        <p t-esc="o.origin[7:] if o.origin else ''"/>
+                    </div>
+                </div>
+
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>
+                                <strong>Description</strong>
+                            </th>
+                            <th>Quality Required</th>
+                            <th class="text-right">
+                                <strong>Quantity</strong>
+                            </th>
+                            <th class="text-right">
+                                <strong>Unit Price</strong>
+                            </th>
+                            <th>
+                                <strong>Taxes</strong>
+                            </th>
+                            <th class="text-right">
+                                <strong>Amount</strong>
+                            </th>
+                            <th class="text-center">
+                                <strong>Delivery Date</strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="o.order_line" t-as="line">
+                            <td>
+                                <span t-esc="line_index+1"/>
+                            </td>
+                            <td>
+                                <span t-field="line.name"/>
+                            </td>
+                            <td>
+                                <span/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="line.product_qty"/>
+                                <span t-field="line.product_uom.name" groups="product.group_uom"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="line.price_unit"/>
+                            </td>
+                            <td>
+                                <span t-esc="', '.join(map(lambda x: x.name, line.taxes_id))"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="line.price_subtotal"
+                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                            <td class="text-center">
+                                <span t-field="line.date_planned" t-field-options='{"format": "d m Y"}'/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-7">
+                        <table class="table table-condensed">
+                            <tr class="border-black">
+                                <td>
+                                    <strong>Subtotal</strong>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_untaxed"
+                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Taxes</td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_tax"
+                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                </td>
+                            </tr>
+                            <tr class="border-black">
+                                <td>
+                                    <strong>Total</strong>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_total"
+                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-3">
+                        <p class="text-center">
+                            <strong>Quality Control Requirements</strong>
+                        </p>
+                    </div>
+                    <div class="col-xs-9">
+                        <p>Tüm detay resim şartlarına tam uyum sağlanacaktır.
+                            <br/>
+                            Parçalar üzerinde, kodları ve ölçüleri yazılmış şekilde teslim edilecektir.
+                            <br/>
+                            Malzemeler Rotafilo Savunma Havacılık ve Enerji Teknolojileri San. ve Tic. Ltd. Sti'ye
+                            teslim edilecektir.
+                            <br/>
+                            Rotafilo Savunma Havacılık ve Enerji Teknolojileri San. ve Tic. Ltd. Sti tarafından
+                            yapılacak malzeme ölçümleri sonucu çıkabilecek hatalı parçalar tarafınıza iade edilecek ve
+                            tarafınızdan yenisi temin edilecektir.
+                            <br/>
+                            Ölçüler resimde verilen toleranslar içerisinde olacaktır.
+                            <br/>
+                            Ham malzeme ve sarf malzemeler istenen cinste ve sertifikalı olacaktır.
+                            <br/>
+                            Teknik resimde isteniyorsa takım teslim edilmeden önce yük testi, vb. testler yüklenici
+                            tarafından yapılacak ve onaylı belgenin bir kopyası gönderilecektir.
+                            <br/>
+                            Takım imalatı sırasında yapılan kaynaklar için talep edildiğinde Röntgen ve NDT muayene
+                            testi yaptırılacaktır.
+                            <br/>
+                            Resimde bilgi olarak verilen bütün prosesler değiştirilmeksizin uygulanacaktır. (Kumlama,
+                            Shotpeen, Isıl işlem, Kaplama, Boya vb.)
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <p class="text-center">
+                            <strong>Special Terms and Conditions</strong>
+                        </p>
+                    </div>
+                    <div class="col-xs-9">Hizmetin kararlaştırılan zamanda teslim edilemediğinde her gecikme takvim
+                        gününe KDV hariç toplam bedelin binde beşi kadar gecikme cezası uygulanacaktır.
+                        <br/>
+                        Takımların uygun olmaması durumunda sipariş şartlarına uygun olarak yenisi yapılacak ve gecikme
+                        süresince cezai işlem uygulanacaktır.
+                        <br/>
+                        Söz konusu iş’in imali esnasında kullanılan tüm ölçü aletleri kalibrasyonlu ve belgeli
+                        olacaktır.
+                        <br/>
+                        Anlaşmazlıkların çözümlenmesinde yetkili mercii Eskişehir Mahkemeleri ve İcra Daireleridir.
+                        <br/>
+                        Takım numaraları, adetleri ve birim fiyatları ek olarak verilmiştir.
+                        <br/>
+                        EKLER :
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <p class="text-center">
+                            <strong>Payment Terms</strong>
+                        </p>
+                    </div>
+                    <div class="col-xs-9">Teslimatın uygun bulunmasını takiben 120 gün vade ile ödeme</div>
+                </div>
+                <div class="row">
+                    <strong>Our Purchasing conditions, are already indicated in "ROTAFİLO SUPPLIER CONTRACT &amp;
+                        PURCHASING CONDITIONS" which was given previously.
+                    </strong>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <p class="text-center">
+                            <strong>SUPPLY CHAIN LEADER APPROVAL</strong>
+                        </p>
+                    </div>
+                    <div class="col-xs-3" style="height: 150px">
+                        <p class="text-center">
+                            <strong>GENERAL MANAGER APPROVAL</strong>
+                        </p>
+                    </div>
+                    <div class="col-xs-3">
+                        <p class="text-center">
+                            <strong>SUBCONTRACTOR APPROVAL</strong>
+                        </p>
+                    </div>
+                    <div class="col-xs-3">
+                        <p class="text-center">
+                            <strong>ENGINEER APPROVAL</strong>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <p class="text-center">
+                                <strong>PRODUCTION/SERVICE APPROVAL</strong>
+                            </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <strong>YES</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p>THIS SECTION WILL BE FILLED BY ROTAFILO AFTER RECEIVING EVALUATION</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-7">
+                        <strong>ORDER QUALITY (Timing,conformity,etc)</strong>
+                    </div>
+                    <div class="col-xs-5">
+                        <p class="text-center">
+                            <strong>SUPPLY CHAIN LEADER APPROVAL</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <p t-field="o.notes"/>
+                <div class="oe_structure"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>
