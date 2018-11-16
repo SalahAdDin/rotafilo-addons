@@ -158,6 +158,68 @@
                             <br/>
                             Resimde bilgi olarak verilen bütün prosesler değiştirilmeksizin uygulanacaktır. (Kumlama,
                             Shotpeen, Isıl işlem, Kaplama, Boya vb.)
+                            <br/>
+                            Süpheli parça olması durumunda parça karantinada bekletilip test ve muayene sonuçlarına
+                            göre, istenilen özelliklere uymaması durumunda tarafınıza iade edilecektir.
+                            <br/>
+                            Sahte parça olması durumunda parça tarafınıza iade edilecektir.
+                        </p>
+                        <p>
+                            <strong>Talaşlı İmalat amacıyla gönderilen parçalar için;</strong>
+                            <br/>
+                            Tüm detay resim şartlarına tam uyum sağlanacaktır.
+                            <br/>
+                            Parçalar üzerinde, kodları ve ölçüleri yazılmış şekilde teslim edilecektir.
+                            <br/>
+                            Rotafilo Savunma Havacılık ve Enerji Teknolojileri San. ve Tic. Ltd. Sti tarafından
+                            yapılacak malzeme ölçümleri sonucu çıkabilecek hatalı parçalar tarafınıza iade edilecek ve
+                            tarafınızdan yenisi temin
+                            edilecektir.
+                            <br/>
+                            Ölçüler resimde verilen toleranslar içerisinde olacaktır.
+                            <br/>
+                            Takım imalatı sırasında yapılan kaynaklar için talep edildiğinde ve NDT muayene testi
+                            yaptırılacaktır.
+                        </p>
+                        <p>
+                            <strong>Isıl İşlem amacıyla gönderilen parçalar için;</strong>
+                            <br/>
+                            Sertlik / Basınç değerleri dikkate alınacaktır.
+                            <br/>
+                            Sertlik / Basınç şartlarına tam uyum sağlanacaktır.
+                            <br/>
+                            Isıl İşlem görmüş malzemeler istenen şekilde ve sertifikalı olacaktır.
+                            <br/>
+                            Rotafilo Savunma Havacılık ve Enerji Teknolojileri San. ve Tic. Ltd. Sti tarafından
+                            yapılacak malzeme kontrolü sonucu çıkabilecek hatalı parçalar tarafınıza iade edilecek ve
+                            tarafınızdan yenisi temin
+                            edilecektir
+                        </p>
+                        <p>
+                            <strong>Kaplama amacıyla gönderilen parçalar için;</strong>
+                            <br/>
+                            Kaplama Çeşidi / Ağırlık / Kalınlık değerleri dikkate alınacaktır.
+                            <br/>
+                            Kalınlık ve ağırlık şartlarına tam uyum sağlanacaktır.
+                            <br/>
+                            Kaplanan Malzemeler istenen şekilde ve sertifikalı olacaktır.
+                            <br/>
+                            Rotafilo Savunma Havacılık ve Enerji Teknolojileri San. ve Tic. Ltd. Sti tarafından
+                            yapılacak malzeme kontrolü sonucu çıkabilecek hatalı parçalar tarafınıza iade edilecek ve
+                            tarafınızdan yenisi temin edilecektir.
+                        </p>
+                        <p>
+                            <strong>Lazer Kesim / Büküm amacıyla gönderilen parçalar için;</strong>
+                            <br/>
+                            dxf / pdf dosyası dikkate alınacaktır.
+                            <br/>
+                            Tüm detay resim şartlarına tam uyum sağlanacaktır.
+                            <br/>
+                            Malzemeler istenen şekilde ve sertifikalı olacaktır.
+                            <br/>
+                            Rotafilo Savunma Havacılık ve Enerji Teknolojileri San. ve Tic. Ltd. Sti tarafından
+                            yapılacak malzeme kontrolü sonucu çıkabilecek hatalı parçalar tarafınıza iade edilecek ve
+                            tarafınızdan yenisi temin edilecektir.
                         </p>
                     </div>
                 </div>
@@ -196,51 +258,31 @@
                         PURCHASING CONDITIONS" which was given previously.
                     </strong>
                 </div>
-                <div class="row">
-                    <div class="col-xs-3">
+                <div class="row" style="min-height: 150px">
+                    <div class="col-xs-4">
                         <p class="text-center">
                             <strong>SUPPLY CHAIN LEADER APPROVAL</strong>
                         </p>
                     </div>
-                    <div class="col-xs-3" style="height: 150px">
+                    <div class="col-xs-4">
                         <p class="text-center">
                             <strong>GENERAL MANAGER APPROVAL</strong>
                         </p>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-xs-4">
                         <p class="text-center">
                             <strong>SUBCONTRACTOR APPROVAL</strong>
                         </p>
                     </div>
-                    <div class="col-xs-3">
-                        <p class="text-center">
-                            <strong>ENGINEER APPROVAL</strong>
-                        </p>
-                    </div>
                 </div>
                 <div class="row">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <p class="text-center">
-                                <strong>PRODUCTION/SERVICE APPROVAL</strong>
-                            </p>
-                        </div>
-                        <div class="col-xs-6">
-                            <strong>YES</strong>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <p>THIS SECTION WILL BE FILLED BY ROTAFILO AFTER RECEIVING EVALUATION</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-7">
-                        <strong>ORDER QUALITY (Timing,conformity,etc)</strong>
-                    </div>
-                    <div class="col-xs-5">
+                    <div class="col-xs-6">
                         <p class="text-center">
-                            <strong>SUPPLY CHAIN LEADER APPROVAL</strong>
+                            <strong>PRODUCTION/SERVICE APPROVAL</strong>
                         </p>
+                    </div>
+                    <div class="col-xs-6">
+                        <strong>YES</strong>
                     </div>
                 </div>
 
