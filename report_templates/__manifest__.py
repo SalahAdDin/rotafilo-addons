@@ -18,6 +18,7 @@ Easier way to install the custom report templates in the system.
         'report/ir_qweb.xml',
         'report/mrp_bom_cost_report_templates.xml',
         'report/mrp_bom_structure_report_templates.xml',
+        'report/mrp_production_templates.xml',
         'report/purchase_order_templates.xml',
         'report/purchase_quotation_templates.xml',
     ],
