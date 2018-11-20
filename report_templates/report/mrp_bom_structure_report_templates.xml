@@ -4,68 +4,70 @@
         <xpath expr="//div[@class='page']" position="replace">
             <t t-foreach="docs" t-as="o">
                 <div class="page">
-                    <div class="col-xs-6">
-                        <t t-if="o.product_id">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <t t-if="o.product_id">
+                                <p>
+                                    <strong>Part No.:</strong>
+                                    <span t-field="o.product_id.default_code"/>
+                                </p>
+                                <p>
+                                    <strong>Part Name:</strong>
+                                    <span t-field="o.product_id.name"/>
+                                </p>
+                            </t>
+                            <t t-else="o.product_tmpl_id">
+                                <p>
+                                    <strong>Part No.:</strong>
+                                    <span t-field="o.product_tmpl_id.default_code"/>
+                                </p>
+                                <p>
+                                    <strong>Part Name:</strong>
+                                    <span t-field="o.product_tmpl_id.name"/>
+                                </p>
+                            </t>
                             <p>
-                                <strong>Part No.:</strong>
-                                <span t-field="o.product_id.default_code"/>
+                                <strong>Quantity:</strong>
+                                <span t-field="o.product_qty"/>
+                                <span groups="product.group_uom" t-field="o.product_uom_id.name"/>
                             </p>
                             <p>
-                                <strong>Part Name:</strong>
-                                <span t-field="o.product_id.name"/>
+                                <strong>Reference:</strong>
+                                <span t-field="o.code"/>
                             </p>
-                        </t>
-                        <t t-else="o.product_tmpl_id">
-                            <p>
-                                <strong>Part No.:</strong>
-                                <span t-field="o.product_tmpl_id.default_code"/>
-                            </p>
-                            <p>
-                                <strong>Part Name:</strong>
-                                <span t-field="o.product_tmpl_id.name"/>
-                            </p>
-                        </t>
-                        <p>
-                            <strong>Quantity:</strong>
-                            <span t-field="o.product_qty"/>
-                            <span groups="product.group_uom" t-field="o.product_uom_id.name"/>
-                        </p>
-                        <p>
-                            <strong>Reference:</strong>
-                            <span t-field="o.code"/>
-                        </p>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <h2>Bill of Materials Structure
+                            </h2>
+                        </div>
                     </div>
-                    <div class="col-xs-6 text-right">
-                        <h2>Bill of Materials Structure
-                        </h2>
-                    </div>
-                </div>
 
-                <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <!--<th>Item Position</th>-->
-                            <th>Description</th>
-                            <th>Quantity</th>
-                            <th>BOM Ref</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr t-foreach="get_children(o.bom_line_ids)" t-as="l">
-                            <td style="padding-left: 20px;">
-                                <span style="color: white;" t-esc="'... '*(l['level'])"/>
-                                <span t-esc="l['pname']"/>
-                            </td>
-                            <td>
-                                <span t-esc="l['pqty']"/>
-                                <span t-esc="l['uname']" groups="product.group_uom"/>
-                            </td>
-                            <td>
-                                <span t-esc="l['code']"/>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <!--<th>Item Position</th>-->
+                                <th>Description</th>
+                                <th>Quantity</th>
+                                <th>BOM Ref</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="get_children(o.bom_line_ids)" t-as="l">
+                                <td style="padding-left: 20px;">
+                                    <span style="color: white;" t-esc="'... '*(l['level'])"/>
+                                    <span t-esc="l['pname']"/>
+                                </td>
+                                <td>
+                                    <span t-esc="l['pqty']"/>
+                                    <span t-esc="l['uname']" groups="product.group_uom"/>
+                                </td>
+                                <td>
+                                    <span t-esc="l['code']"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </t>
         </xpath>
     </template>
