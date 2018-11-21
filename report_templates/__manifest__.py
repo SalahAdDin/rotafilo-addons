@@ -21,6 +21,7 @@ Easier way to install the custom report templates in the system.
         'report/mrp_production_templates.xml',
         'report/purchase_order_templates.xml',
         'report/purchase_quotation_templates.xml',
+        'report/sale_report_templates.xml',
     ],
     'demo': [''],
     'installable': True,
