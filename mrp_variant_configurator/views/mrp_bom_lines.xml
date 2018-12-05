@@ -11,9 +11,12 @@
                 <!-- force using the form -->
                 <attribute name="editable"/>
             </xpath>
+            <xpath expr="//field[@name='bom_line_ids']/tree/field[@name='product_id']" position="after">
+                <field name="name"/>
+            </xpath>
             <xpath expr="//field[@name='bom_line_ids']/tree"
                    position="before">
-                <form string="Sales Order Lines">
+                <form string="BoM Lines">
                     <group>
                         <field name="product_tmpl_id"/>
                         <field name="product_attribute_ids" widget="one2many"
@@ -34,9 +37,28 @@
                                attrs="{'invisible':
                             [('can_create_product', '=', False)]}"/>
                     </group>
+                    <group>
+                        <group>
+                            <field name="product_id"/>
+                            <label for="product_qty"/>
+                            <div>
+                                <field name="product_qty" class="oe_inline"/>
+                                <span class="oe_inline"/>
+                                <field name="product_uom_id" groups="product.group_uom" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="has_attachments" invisible="1"/>
+                            <field name="attribute_value_ids" widget="many2many_tags" options="{'no_create': True}"
+                                   domain="[('product_ids.product_tmpl_id', '=', parent.product_tmpl_id)]"
+                                   groups="product.group_product_variant"/>
+                            <field name="operation_id" groups="mrp.group_mrp_routings"
+                                   domain="[('routing_id', '=', parent.routing_id)]"
+                                   options="{'no_quick_create':True,'no_create_edit':True}"/>
+                        </group>
+                    </group>
                 </form>
             </xpath>
         </field>
     </record>
-
 </odoo>
