@@ -10,9 +10,7 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
-                    }
-                    .dl-horizontal dd {
-                        margin-left: 10px;
+                        margin-right: 10px;
                     }
                 </style>
                 <div class="oe_structure"/>
