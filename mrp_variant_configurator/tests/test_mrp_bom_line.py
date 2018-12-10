@@ -3,19 +3,19 @@
 from odoo.tests.common import SavepointCase
 
 
-class TestPurchaseOrder(SavepointCase):
+class TestMrpBom(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(TestPurchaseOrder, cls).setUpClass()
+        super(TestMrpBom, cls).setUpClass()
 
         # ENVIRONMENTS
         cls.product_attribute = cls.env['product.attribute']
         cls.product_attribute_value = cls.env['product.attribute.value']
         cls.product_template = cls.env['product.template'].with_context(
             check_variant_creation=True)
-        cls.purchase_order = cls.env['purchase.order']
+        cls.mrp_bom = cls.env['mrp.bom']
         cls.product_product = cls.env['product.product']
-        cls.purchase_order_line = cls.env['purchase.order.line']
+        cls.mrp_bom_line = cls.env['mrp.bom.line']
         cls.res_partner = cls.env['res.partner']
         cls.product_category = cls.env['product.category']
 
@@ -57,22 +57,13 @@ class TestPurchaseOrder(SavepointCase):
             'description_purchase': "Purchase Description"
         })
 
-        cls.supplier = cls.res_partner.create({
-            'name': 'Supplier 1',
-            'is_company': True,
-            'supplier': True
-        })
-
     def test_onchange_product_tmpl_id(self):
 
-        line1 = self.purchase_order_line.new({
+        line1 = self.mrp_bom_line.new({
             'product_tmpl_id': self.product_template_yes.id,
-            'price_unit': 100,
             'product_uom': self.product_template_yes.uom_id.id,
             'product_qty': 1,
             'name': 'Line 1',
-            'date_planned': '2016-01-01',
-
         })
 
         result = line1._onchange_product_tmpl_id_configurator()
@@ -82,13 +73,11 @@ class TestPurchaseOrder(SavepointCase):
         ]
         self.assertEqual(result['domain']['product_id'], expected_domain)
 
-        line2 = self.purchase_order_line.new({
+        line2 = self.mrp_bom_line.new({
             'product_tmpl_id': self.product_template_no.id,
             'product_uom': self.product_template_no.uom_id.id,
             'product_qty': 1,
-            'price_unit': 200,
             'name': 'Line 2',
-            'date_planned': '2016-01-01',
         })
 
         line2._onchange_product_tmpl_id_configurator()
@@ -112,18 +101,16 @@ class TestPurchaseOrder(SavepointCase):
             })]
         })
 
-        line = self.purchase_order_line.new({
+        line = self.mrp_bom_line.new({
             'product_tmpl_id': self.product_template_yes.id,
-            'price_unit': 100,
             'name': 'Line 1',
             'product_qty': 1,
-            'date_planned': '2016-01-01',
             'product_uom': self.product_template_yes.uom_id.id,
             'product_attribute_ids': [(0, 0, {
                 'product_tmpl_id': self.product_template_yes.id,
                 'attribute_id': self.attribute1.id,
                 'value_id': self.value1.id,
-                'owner_model': 'purchase.order.line'
+                'owner_model': 'mrp.bom.line'
             })]
         })
 
@@ -138,12 +125,10 @@ class TestPurchaseOrder(SavepointCase):
         self.assertEqual(result['domain'], {'product_id': expected_domain})
 
     def test_can_create_product_variant(self):
-        line = self.purchase_order_line.new({
+        line = self.mrp_bom_line.new({
             'product_tmpl_id': self.product_template_yes.id,
-            'price_unit': 100,
             'name': 'Line 1',
             'product_qty': 1,
-            'date_planned': '2016-01-01',
             'product_uom': self.product_template_yes.uom_id.id,
         })
         self.assertFalse(line.can_create_product)
@@ -151,7 +136,7 @@ class TestPurchaseOrder(SavepointCase):
             'product_tmpl_id': self.product_template_yes.id,
             'attribute_id': self.attribute1.id,
             'value_id': self.value1.id,
-            'owner_model': 'purchase.order.line',
+            'owner_model': 'mrp.bom.line',
             'owner_id': line.id,
         })
         line.product_attribute_ids = attributes
@@ -172,21 +157,24 @@ class TestPurchaseOrder(SavepointCase):
             })]
         })
 
-        order = self.purchase_order.create({
-            'partner_id': self.supplier.id,
+        bom = self.mrp_bom.create({
+            'product_id': self.product_7.id,
+            'product_tmpl_id': self.product_7.product_tmpl_id.id,
+            'product_uom_id': self.uom_unit.id,
+            'product_qty': 4.0,
+            'routing_id': self.routing_2.id,
+            'type': 'normal',
 
-            'order_line': [(0, 0, {
+            'bom_line': [(0, 0, {
                 'product_id': product.id,
-                'price_unit': 100,
                 'name': 'Line 1',
                 'product_qty': 1,
-                'date_planned': '2016-01-01',
                 'product_uom': product.uom_id.id,
 
             })]
         })
 
-        line = order.order_line[0]
+        line = bom.bom_line_ids[0]
         with self.cr.savepoint():
             line.onchange_product_id()
             line._onchange_product_id_configurator()
@@ -194,32 +182,25 @@ class TestPurchaseOrder(SavepointCase):
             self.assertEqual(line.product_tmpl_id, self.product_template_yes)
 
     def test_button_confirm(self):
-        order = self.purchase_order.create({
-            'partner_id': self.supplier.id,
-
-        })
-        line_1 = self.purchase_order_line.new({
+        bom = self.mrp_bom.create({})
+        line_1 = self.mrp_bom_line.new({
             'product_tmpl_id': self.product_template_yes.id,
-            'price_unit': 100,
             'name': 'Line 1',
             'product_qty': 1,
-            'date_planned': '2016-01-01',
             'product_uom': self.product_template_yes.uom_id.id,
             'product_attribute_ids': [(0, 0, {
                 'product_tmpl_id': self.product_template_yes.id,
                 'attribute_id': self.attribute1.id,
                 'value_id': self.value1.id,
-                'owner_model': 'purchase.order.line'
+                'owner_model': 'mrp.bom.line'
             })],
             'create_product_variant': True,
         })
-        line_2 = self.purchase_order_line.new({
+        line_2 = self.mrp_bom_line.new({
             'product_tmpl_id': self.product_template_no.id,
             'product_uom': self.product_template_no.uom_id.id,
             'product_qty': 1,
-            'price_unit': 200,
             'name': 'Line 2',
-            'date_planned': '2016-01-01',
             'create_product_variant': True,
         })
 
@@ -233,11 +214,11 @@ class TestPurchaseOrder(SavepointCase):
                 line.create_product_variant = True
                 line._onchange_create_product_variant()
 
-        order.write({'order_line': [(4, line_1.id), (4, line_2.id)]})
-        order.button_confirm()
+        bom.write({'bom_line_ids': [(4, line_1.id), (4, line_2.id)]})
+        bom.button_confirm()
 
-        order_line_without_product = order.order_line.filtered(
+        bom_line_without_product = bom.bom_line_ids.filtered(
             lambda x: not x.product_id)
 
-        self.assertEqual(len(order_line_without_product), 0,
+        self.assertEqual(len(bom_line_without_product), 0,
                          "All purchase lines must have a product")
