@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Views -->
-    <record id="mrp_bom_form_extende_view" model="ir.ui.view">
+    <record id="mrp_bom_form_extended_view" model="ir.ui.view">
         <field name="name">mrp.bom.form.extended</field>
         <field name="model">mrp.bom</field>
         <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
