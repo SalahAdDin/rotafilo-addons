@@ -12,8 +12,6 @@ class BomStructureReport(models.AbstractModel):
     @api.model
     def _get_child_vals(self, record, level, qty, uom):
         child = super(BomStructureReport, self)._get_child_vals(record, level, qty, uom)
-        child['p_measure'] = record.measure
-        child['p_measure_uom'] = record.measure_uom_id
-        child['measure_uom_name'] = record.measure_uom_id.name
+        child['p_item_num'] = record.item_num
 
         return child

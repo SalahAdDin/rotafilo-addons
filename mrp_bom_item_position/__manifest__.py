@@ -1,29 +1,24 @@
 {
-    'name': 'MRP Bom Line Measures',
+    'name': 'MRP Bom Item Position',
     'version': '11.0',
     'author': 'José Luis Sandoval Alaguna',
     'website': '',
     'category': 'Manufacture',
     'sequence': 15,
-    'summary': 'Add engineering fields to BoM and Manufacturing issues.',
+    'summary': 'Add the engineering CAD item position field to BoM lines.',
     'images': [],
     'depends': [
         'mrp',
-        'stock',
-        'purchase',
-        'sale_stock',
+        'mrp_variant_configurator',
     ],
     'description': """
-MRP Bom Line Measures
+MRP Bom Item Position
 =====================
-Manage measures for items in Product's BoM.
+Add the engineering CAD item position field to BoM lines.
     """,
     'data': [
         'views/mrp_bom_lines.xml',
-        'views/purchase_views.xml',
         'report/mrp_bom_structure_report_templates.xml',
-        'report/purchase_order_templates.xml',
-        'report/purchase_quotation_templates.xml'
     ],
     'demo': [],
     'test': [],

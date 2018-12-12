@@ -19,15 +19,3 @@ class MrpBomLine(models.Model):
         ),
         size=3
     )
-    measure = fields.Char(
-        _('Measure'),
-        help=_(
-            "Type the measure without blank spaces and un lowercase: ##x##"
-        )
-    )
-    measure_uom_id = fields.Many2one(
-        'product.uom',
-        'Unit of Measure',
-        help=_("Unit of Measure (Unit of Measure) is the unit of measurement"
-               "for the products measure")
-    )

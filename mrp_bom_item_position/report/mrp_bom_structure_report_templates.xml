@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="mrp_bom_inherit_structure_report" inherit_id="mrp.mrp_bom_structure_report">
+        <xpath expr="//table[@class='table table-condensed']//thead//tr" position="replace">
+            <th>Item Position</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>BOM Ref</th>
+        </xpath>
+
+        <xpath expr="//td[@style='padding-left: 20px;']" position="before">
+            <td>
+                <span t-esc="l['p_item_num']"/>
+            </td>
+        </xpath>
+    </template>
+</odoo>
