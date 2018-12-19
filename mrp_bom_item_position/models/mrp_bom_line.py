@@ -17,5 +17,5 @@ class MrpBomLine(models.Model):
             "This is the item reference position into the CAD "
             "document that declares this BoM."
         ),
-        size=3
+        size=4
     )
